@@ -3,7 +3,7 @@ const { Job } = require("../models/Job");
 const jobController = {
   getAll: (req, res) => {
     Job.find()
-      .populate("locations") 
+      .populate([{ path: "locations" }]) 
       .then((data) => {
         res.json(data);
       })
@@ -56,7 +56,7 @@ const jobController = {
       },
       { new: true }
     )
-      .populate("locations")
+      .populate([{ path: "locations" }])
       .then((data) => {
         if (data) res.json(data);
         else res.status(404).json({ msg: "Not found!" });
